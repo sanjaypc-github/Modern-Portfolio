@@ -207,17 +207,13 @@ function Portfolio() {
         <section id="about" className="mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden">
           <div className="relative h-[640px] md:h-[680px]">
             {/* dashed connectors */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
-              <defs>
-                <pattern id="d" patternUnits="userSpaceOnUse" width="6" height="1">
-                  <line x1="0" y1="0" x2="3" y2="0" stroke="currentColor" strokeWidth="1" className="text-accent/40" />
-                </pattern>
-              </defs>
-              <g strokeDasharray="4 6" strokeWidth="1" fill="none" className="stroke-accent/30">
-                <path d="M 18% 12% L 50% 50% L 90% 22%" />
-                <path d="M 10% 50% L 50% 50% L 88% 60%" />
-                <path d="M 28% 90% L 50% 50% L 78% 88%" />
-                <path d="M 42% 6% L 50% 50%" />
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <g strokeDasharray="0.6 0.9" strokeWidth="0.15" fill="none" className="stroke-accent/40">
+                <path d="M 18 12 L 50 50 L 90 22" />
+                <path d="M 10 50 L 50 50 L 88 60" />
+                <path d="M 28 90 L 50 50 L 78 88" />
+                <path d="M 42 6 L 50 50" />
+                <path d="M 60 10 L 88 22" />
               </g>
             </svg>
 
