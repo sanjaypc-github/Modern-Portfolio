@@ -1,10 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
-import { Bot, Headset, LineChart, Eye, X, Sparkles } from "lucide-react";
+import {
+  Bot,
+  Headset,
+  LineChart,
+  Eye,
+  X,
+  Sparkles,
+  Github,
+  Linkedin,
+  Mail,
+  Code2,
+} from "lucide-react";
 import sanjayAsset from "@/assets/sanjay.jpeg.asset.json";
 import DisplayCards from "@/components/ui/display-cards";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { MagicText } from "@/components/ui/magic-text";
+import SocialCards from "@/components/ui/card-fan-carousel";
+import { Footer } from "@/components/ui/modem-animated-footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -91,25 +105,51 @@ const achievements = [
   { k: "1", v: "Patent published" },
 ];
 
-const aboutTags = [
-  { label: "REACT", style: "top-[8%] left-[12%]" },
-  { label: "FASTAPI", style: "top-[2%] left-[42%]" },
-  { label: "MONGODB", style: "top-[18%] right-[10%]" },
-  { label: "GEMINI", style: "top-[45%] left-[4%]" },
-  { label: "DOCKER", style: "bottom-[18%] left-[22%]" },
-  { label: "LANGCHAIN", style: "bottom-[8%] right-[18%]" },
-  { label: "TENSORFLOW", style: "top-[55%] right-[6%]" },
+// Reference-image-style constellation. Each orb has a position (%), size, depth.
+type Orb = { id: string; x: number; y: number; size: number; tone?: "deep" | "violet" | "pale" };
+const orbs: Orb[] = [
+  { id: "a", x: 32, y: 8, size: 22, tone: "deep" },
+  { id: "b", x: 14, y: 30, size: 60, tone: "deep" },
+  { id: "c", x: 56, y: 22, size: 16, tone: "violet" },
+  { id: "d", x: 95, y: 7, size: 14, tone: "pale" },
+  { id: "e", x: 82, y: 47, size: 68, tone: "deep" },
+  { id: "f", x: 11, y: 60, size: 20, tone: "violet" },
+  { id: "g", x: 27, y: 86, size: 36, tone: "deep" },
+  { id: "h", x: 48, y: 72, size: 44, tone: "deep" },
+  { id: "i", x: 92, y: 84, size: 28, tone: "pale" },
 ];
 
-const aboutOrbs = [
-  { style: "top-[12%] left-[40%] w-5 h-5", delay: "0s" },
-  { style: "top-[24%] left-[18%] w-12 h-12", delay: "1s" },
-  { style: "top-[55%] left-[8%] w-4 h-4", delay: "2s" },
-  { style: "top-[40%] right-[18%] w-16 h-16", delay: "0.5s" },
-  { style: "bottom-[10%] right-[8%] w-6 h-6", delay: "2.5s" },
-  { style: "bottom-[8%] left-[34%] w-9 h-9", delay: "1.5s" },
-  { style: "top-[68%] left-[48%] w-14 h-14", delay: "3s" },
+// Pill labels for the constellation — drawn from my actual toolkit.
+const constellationPills = [
+  { label: "MODEL ARCHITECTURES", x: 7, y: 22 },
+  { label: "CLOUD DEPLOYMENT", x: 30, y: 13 },
+  { label: "PERFORMANCE TUNING", x: 70, y: 16 },
+  { label: "DATA PIPELINES", x: 22, y: 78 },
+  { label: "API INTEGRATION", x: 44, y: 82 },
+  { label: "CI/CD FOR ML", x: 65, y: 67 },
 ];
+
+// Dashed connector paths in 0–100 viewBox space connecting the orbs.
+const connectors = [
+  "M 32 8 L 14 30 L 11 60 L 27 86",
+  "M 14 30 L 56 22 L 82 47 L 92 84",
+  "M 56 22 L 48 72 L 65 67 L 82 47",
+  "M 27 86 L 48 72",
+  "M 56 22 L 95 7",
+  "M 11 60 L 48 72",
+  "M 14 30 L 82 47",
+];
+
+function orbBackground(tone: Orb["tone"]) {
+  switch (tone) {
+    case "violet":
+      return "radial-gradient(circle at 30% 25%, oklch(0.70 0.20 300), oklch(0.35 0.14 295) 55%, oklch(0.20 0.08 290))";
+    case "pale":
+      return "radial-gradient(circle at 30% 25%, oklch(0.92 0.05 300), oklch(0.78 0.08 295) 55%, oklch(0.55 0.10 290))";
+    default:
+      return "radial-gradient(circle at 30% 25%, oklch(0.55 0.16 295), oklch(0.26 0.10 290) 55%, oklch(0.14 0.05 285))";
+  }
+}
 
 function Portfolio() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -203,92 +243,103 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* ABOUT — orbital constellation */}
-        <section id="about" className="mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden">
-          <div className="relative h-[640px] md:h-[680px]">
-            {/* dashed connectors */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <g strokeDasharray="0.6 0.9" strokeWidth="0.15" fill="none" className="stroke-accent/40">
-                <path d="M 18 12 L 50 50 L 90 22" />
-                <path d="M 10 50 L 50 50 L 88 60" />
-                <path d="M 28 90 L 50 50 L 78 88" />
-                <path d="M 42 6 L 50 50" />
-                <path d="M 60 10 L 88 22" />
+        {/* ABOUT — top headline */}
+        <section id="about" className="mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden px-8 md:px-14 pt-16 pb-10">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <span className="text-xs font-mono tracking-[0.25em] uppercase mb-6 inline-block" style={{ color: "oklch(0.45 0.2 290)" }}>
+              What I bring to the table
+            </span>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="font-display text-4xl md:text-6xl leading-[1.05]"
+            >
+              Turning complexity
+              <br />
+              into <span className="italic">action</span>
+            </motion.h2>
+          </div>
+
+          {/* Orbital constellation field */}
+          <div className="relative w-full h-[460px] md:h-[520px]">
+            {/* Dashed connectors */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <g
+                strokeDasharray="0.5 0.8"
+                strokeWidth="0.18"
+                fill="none"
+                vectorEffect="non-scaling-stroke"
+                className="stroke-foreground/25"
+              >
+                {connectors.map((d, i) => (
+                  <path key={i} d={d} />
+                ))}
               </g>
             </svg>
 
-            {/* gradient orbs */}
-            {aboutOrbs.map((o, i) => (
+            {/* Orbs */}
+            {orbs.map((o, i) => (
               <motion.div
-                key={i}
-                className={`absolute rounded-full animate-blob ${o.style}`}
+                key={o.id}
+                initial={{ opacity: 0, scale: 0.6 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: 0.1 + i * 0.06, duration: 0.6, type: "spring", stiffness: 140 }}
+                className="absolute rounded-full animate-blob"
                 style={{
-                  animationDelay: o.delay,
-                  background:
-                    "radial-gradient(circle at 30% 30%, oklch(0.55 0.18 290), oklch(0.25 0.08 280) 60%, oklch(0.15 0.05 280))",
-                  boxShadow: "0 8px 30px -8px oklch(0.3 0.15 285 / 0.5)",
+                  left: `${o.x}%`,
+                  top: `${o.y}%`,
+                  width: `${o.size}px`,
+                  height: `${o.size}px`,
+                  marginLeft: `-${o.size / 2}px`,
+                  marginTop: `-${o.size / 2}px`,
+                  background: orbBackground(o.tone),
+                  boxShadow: "0 10px 30px -8px oklch(0.25 0.12 285 / 0.45)",
+                  animationDelay: `${i * 0.4}s`,
                 }}
               />
             ))}
 
-            {/* floating pill labels */}
-            {aboutTags.map((t, i) => (
+            {/* Pill labels */}
+            {constellationPills.map((p, i) => (
               <motion.div
-                key={t.label}
-                initial={{ opacity: 0, y: 8 }}
+                key={p.label}
+                initial={{ opacity: 0, y: 6 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
-                className={`absolute ${t.style} bg-surface-lowest border border-border rounded-md px-3 py-1.5 text-[10px] font-mono tracking-widest shadow-sm`}
+                transition={{ delay: 0.3 + i * 0.07, duration: 0.5 }}
+                className="absolute bg-surface-lowest border border-border rounded-md px-3 py-1.5 text-[10px] font-mono tracking-widest shadow-sm whitespace-nowrap"
+                style={{
+                  left: `${p.x}%`,
+                  top: `${p.y}%`,
+                  transform: "translate(-50%, -50%)",
+                }}
               >
-                {t.label}
+                {p.label}
               </motion.div>
             ))}
 
-            {/* center content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 max-w-2xl mx-auto">
-              <motion.span
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-xs font-mono tracking-[0.25em] uppercase mb-6"
-                style={{ color: "oklch(0.45 0.2 290)" }}
-              >
-                What I bring to the table
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="font-display text-4xl md:text-6xl leading-[1.05]"
-              >
-                Turning complexity
-                <br />
-                into <span className="italic">action</span>
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.7 }}
-                className="mt-6 text-muted-foreground max-w-lg leading-relaxed"
-              >
-                Today's teams need someone who can wire APIs, train models, and ship a UI in the same week.
-                I bring every layer of the stack together — translating raw data, LLM pipelines,
-                and product intuition into experiences that actually work in production.
-              </motion.p>
+            {/* Decorative sparkle */}
+            <Sparkles className="absolute right-2 bottom-4 size-5 text-foreground/30" />
+          </div>
+        </section>
 
-              {/* stats row */}
-              <div className="mt-10 grid grid-cols-4 gap-6">
-                {achievements.map((a) => (
-                  <div key={a.v} className="text-center">
-                    <div className="font-display text-2xl md:text-3xl text-accent">{a.k}</div>
-                    <div className="text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">{a.v}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+        {/* PROFESSIONAL SUMMARY — scroll reveal magic text */}
+        <section className="mb-8 bg-surface-low pill-section px-8 md:px-14 py-24">
+          <div className="max-w-4xl mx-auto">
+            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-8">
+              The story
+            </span>
+            <MagicText
+              text="I started as a curious tinkerer who couldn't stop opening dev tools. That curiosity grew into shipping MERN apps, then into training models, then into building autonomous agents that reason, plan, and execute. Today I sit at the seam between products, data, and AI — turning raw ideas into things real people use. Every project I take on is a chance to learn something I didn't know yesterday and ship something better than what existed before."
+              className="font-display text-2xl md:text-4xl leading-snug flex flex-wrap text-foreground"
+            />
           </div>
         </section>
 
@@ -395,31 +446,77 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* ACHIEVEMENTS LIST */}
+        {/* CERTIFICATIONS — fan carousel */}
+        <section className="mb-8 bg-surface-lowest pill-section soft-shadow px-8 md:px-14 py-20">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="inline-block px-4 py-1.5 bg-surface-high rounded-full text-xs font-medium mb-6">Certifications</span>
+            <h2 className="font-display text-4xl md:text-5xl">
+              Always <span className="italic">leveling up</span>.
+            </h2>
+            <p className="text-sm text-muted-foreground mt-4">A snapshot of credentials and courses that shaped the stack.</p>
+          </div>
+
+          <SocialCards
+            cards={[
+              { imgUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=900&fit=crop", title: "Full-Stack MERN", subtitle: "GSOFT Internship" },
+              { imgUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=900&fit=crop", title: "Python for ML", subtitle: "Specialization" },
+              { imgUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=900&fit=crop", title: "TensorFlow Dev", subtitle: "Deep Learning" },
+              { imgUrl: "https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=600&h=900&fit=crop", title: "Generative AI", subtitle: "LLM Engineering" },
+              { imgUrl: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=600&h=900&fit=crop", title: "Docker Essentials", subtitle: "Containerization" },
+              { imgUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=900&fit=crop", title: "DSA Mastery", subtitle: "200+ LeetCode" },
+              { imgUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=900&fit=crop", title: "Cloud Foundations", subtitle: "AWS / GCP" },
+            ]}
+          />
+        </section>
+
+        {/* RECOGNITION + STATS */}
         <section className="mb-8 bg-surface-lowest pill-section p-12 soft-shadow">
-          <span className="inline-block px-4 py-1.5 bg-surface-high rounded-full text-xs font-medium mb-6">Recognition</span>
-          <h2 className="font-display text-4xl mb-10">Papers, patents & milestones.</h2>
-          <div className="divide-y divide-border">
-            {[
-              { y: "2025", t: "Paper Published", d: "Autocorrect Algorithm for Real-time text correction in Multilingual keyboard Systems" },
-              { y: "2025", t: "Patent Published", d: "Mayon — The Smart Crop Rotator & Market Profit Optimizer" },
-              { y: "—", t: "LeetCode", d: "200+ problems solved" },
-              { y: "—", t: "SkillRack", d: "100+ problems solved" },
-              { y: "2025", t: "MERN Internship", d: "GSOFT Tech Solutions — agile, code reviews, production REST APIs" },
-            ].map((row, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-[60px_180px_1fr] gap-4 py-5 items-baseline hover:bg-surface-low transition rounded-xl px-3 -mx-3"
-              >
-                <span className="text-xs text-muted-foreground font-mono">{row.y}</span>
-                <span className="font-medium">{row.t}</span>
-                <span className="text-sm text-muted-foreground">{row.d}</span>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 items-start">
+            <div>
+              <span className="inline-block px-4 py-1.5 bg-surface-high rounded-full text-xs font-medium mb-6">Recognition</span>
+              <h2 className="font-display text-4xl mb-10">Papers, patents & milestones.</h2>
+              <div className="divide-y divide-border">
+                {[
+                  { y: "2025", t: "Paper Published", d: "Autocorrect Algorithm for Real-time text correction in Multilingual keyboard Systems" },
+                  { y: "2025", t: "Patent Published", d: "Mayon — The Smart Crop Rotator & Market Profit Optimizer" },
+                  { y: "—", t: "LeetCode", d: "200+ problems solved" },
+                  { y: "—", t: "SkillRack", d: "100+ problems solved" },
+                  { y: "2025", t: "MERN Internship", d: "GSOFT Tech Solutions — agile, code reviews, production REST APIs" },
+                ].map((row, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="grid grid-cols-[60px_180px_1fr] gap-4 py-5 items-baseline hover:bg-surface-low transition rounded-xl px-3 -mx-3"
+                  >
+                    <span className="text-xs text-muted-foreground font-mono">{row.y}</span>
+                    <span className="font-medium">{row.t}</span>
+                    <span className="text-sm text-muted-foreground">{row.d}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats card */}
+            <div className="bg-surface-low rounded-3xl p-8 sticky top-24">
+              <div className="text-xs font-mono uppercase tracking-widest text-accent mb-6">By the numbers</div>
+              <div className="grid grid-cols-2 gap-6">
+                {achievements.map((a) => (
+                  <motion.div
+                    key={a.v}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-surface-lowest border border-border rounded-2xl p-5"
+                  >
+                    <div className="font-display text-3xl md:text-4xl text-accent leading-none">{a.k}</div>
+                    <div className="text-[11px] text-muted-foreground mt-2 uppercase tracking-wider">{a.v}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -453,14 +550,27 @@ function Portfolio() {
           </div>
         </section>
 
-        <footer className="py-12 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <span>© 2026 Sanjay PC. Crafted with care.</span>
-          <div className="flex gap-6">
-            <a href="https://github.com" className="hover:text-foreground transition">GitHub</a>
-            <a href="https://linkedin.com" className="hover:text-foreground transition">LinkedIn</a>
-            <a href="https://leetcode.com" className="hover:text-foreground transition">LeetCode</a>
-          </div>
-        </footer>
+        {/* FOOTER */}
+        <div className="mb-8">
+          <Footer
+            brandName="Sanjay PC"
+            brandDescription="Full-Stack Developer & AI Engineer building MERN products and autonomous agents that ship to real users."
+            socialLinks={[
+              { icon: <Github className="size-5" />, href: "https://github.com", label: "GitHub" },
+              { icon: <Linkedin className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
+              { icon: <Code2 className="size-5" />, href: "https://leetcode.com", label: "LeetCode" },
+              { icon: <Mail className="size-5" />, href: "mailto:pcsanjay2006@gmail.com", label: "Email" },
+            ]}
+            navLinks={[
+              { label: "Work", href: "#work" },
+              { label: "About", href: "#about" },
+              { label: "Contact", href: "#contact" },
+            ]}
+            creatorName="Sanjay PC"
+            creatorUrl="mailto:pcsanjay2006@gmail.com"
+            brandIcon={<Sparkles className="size-5" />}
+          />
+        </div>
       </main>
     </div>
   );
