@@ -367,29 +367,30 @@ function Portfolio() {
 
 
         {/* PROFESSIONAL SUMMARY — scroll reveal magic text */}
-        <section className="mb-8 bg-surface-low pill-section px-8 md:px-14 py-24">
+        <section className="mb-6 sm:mb-8 bg-surface-low pill-section px-5 sm:px-8 md:px-14 py-16 sm:py-24">
           <div className="max-w-4xl mx-auto">
-            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-8">
+            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-6 sm:mb-8">
               The story
             </span>
             <MagicText
               text="I started as a curious tinkerer who couldn't stop opening dev tools. That curiosity grew into shipping MERN apps, then into training models, then into building autonomous agents that reason, plan, and execute. Today I sit at the seam between products, data, and AI — turning raw ideas into things real people use. Every project I take on is a chance to learn something I didn't know yesterday and ship something better than what existed before."
-              className="font-display text-2xl md:text-4xl leading-snug flex flex-wrap text-foreground"
+              className="font-display text-xl sm:text-2xl md:text-4xl leading-snug flex flex-wrap text-foreground"
             />
           </div>
         </section>
 
         {/* PROJECTS — stacked display cards */}
-        <section id="work" className="mb-8 bg-surface-low pill-section py-20 px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-6">Selected Work</span>
-            <h2 className="font-display text-4xl md:text-5xl">
+        <section id="work" className="mb-6 sm:mb-8 bg-surface-low pill-section py-14 sm:py-20 px-4 sm:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-4 sm:mb-6">Selected Work</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">
               Things I&apos;ve <span className="italic">built</span> recently.
             </h2>
-            <p className="text-sm text-muted-foreground mt-4">Click a card to see the full story.</p>
+            <p className="text-sm text-muted-foreground mt-4">Tap a card to see the full story.</p>
           </div>
 
-          <div className="flex justify-center items-center min-h-[420px]">
+          {/* Desktop: stacked cards */}
+          <div className="hidden md:flex justify-center items-center min-h-[420px]">
             <DisplayCards
               cards={projects.map((p, i) => ({
                 icon: p.icon,
@@ -400,7 +401,26 @@ function Portfolio() {
               }))}
             />
           </div>
+
+          {/* Mobile: vertical card list */}
+          <div className="md:hidden grid gap-4">
+            {projects.map((p, i) => (
+              <button
+                key={i}
+                onClick={() => setOpenIdx(i)}
+                className="text-left bg-surface-lowest border border-border rounded-2xl p-5 active:scale-[0.98] transition hover:border-accent/40"
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="inline-flex items-center justify-center size-7 rounded-full bg-surface-high text-accent">{p.icon}</span>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">{p.year}</span>
+                </div>
+                <div className="font-display text-xl text-accent mb-1">{p.title}</div>
+                <p className="text-sm text-foreground/80 leading-snug">{p.blurb}</p>
+              </button>
+            ))}
+          </div>
         </section>
+
 
         {/* Project Dialog */}
         <Dialog open={openIdx !== null} onOpenChange={(o) => !o && setOpenIdx(null)}>
