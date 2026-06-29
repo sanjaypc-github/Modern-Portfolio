@@ -4,11 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 
 export interface CardItem {
-  imgUrl: string;
+  imgUrl?: string;
   alt?: string;
   linkUrl?: string;
   title?: string;
   subtitle?: string;
+  node?: React.ReactNode;
 }
 
 interface SocialCardsProps {
@@ -260,9 +261,13 @@ export default function SocialCards({ cards }: SocialCardsProps) {
         <div className="relative w-[14rem] h-[20rem] sm:w-[16rem] sm:h-[22rem] md:w-[18rem] md:h-[24rem] lg:w-[20rem] lg:h-[28rem]">
           {cards.map((card, index) => {
             const image = (
-              <div className="w-full h-full rounded-2xl overflow-hidden border border-border bg-surface-lowest shadow-xl">
-                <img src={card.imgUrl} alt={card.alt ?? ""} className="w-full h-full object-cover pointer-events-none" draggable={false} />
-                {(card.title || card.subtitle) && (
+              <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border bg-surface-lowest shadow-xl">
+                {card.node ? (
+                  <div className="w-full h-full">{card.node}</div>
+                ) : (
+                  <img src={card.imgUrl} alt={card.alt ?? ""} className="w-full h-full object-cover pointer-events-none" draggable={false} />
+                )}
+                {!card.node && (card.title || card.subtitle) && (
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white">
                     {card.title && <div className="font-display text-lg leading-tight">{card.title}</div>}
                     {card.subtitle && <div className="text-[10px] mt-1 uppercase tracking-widest opacity-80">{card.subtitle}</div>}
