@@ -119,6 +119,91 @@ const orbs: Orb[] = [
   { id: "i", x: 92, y: 84, size: 28, tone: "pale" },
 ];
 
+// Certifications — 5 cards with minimal greyscale illustrations
+type Cert = { title: string; issuer: string; year: string; illo: "network" | "pandas" | "python" | "shield" | "sql" };
+const certifications: Cert[] = [
+  { title: "Cisco Networking Basics", issuer: "Cisco", year: "2025", illo: "network" },
+  { title: "Pandas in Python", issuer: "Kaggle", year: "2024", illo: "pandas" },
+  { title: "Python Basics", issuer: "Kaggle", year: "2024", illo: "python" },
+  { title: "Introduction to Cybersecurity", issuer: "Simplilearn", year: "2026", illo: "shield" },
+  { title: "SQL Basics", issuer: "HackerRank", year: "2024", illo: "sql" },
+];
+
+function CertIllustration({ kind }: { kind: Cert["illo"] }) {
+  const common = "w-full h-full";
+  switch (kind) {
+    case "network":
+      return (
+        <svg className={common} viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="6" fill="#fff" />
+          {[[40,50],[160,50],[40,150],[160,150],[100,30],[100,170]].map(([x,y],i)=>(
+            <g key={i}>
+              <line x1="100" y1="100" x2={x} y2={y} stroke="#fff" strokeOpacity="0.35" strokeWidth="1" strokeDasharray="3 3" />
+              <circle cx={x} cy={y} r="5" fill="#fff" fillOpacity="0.8" />
+            </g>
+          ))}
+        </svg>
+      );
+    case "pandas":
+      return (
+        <svg className={common} viewBox="0 0 200 200" fill="none">
+          {[0,1,2,3].map(r=>[0,1,2,3].map(c=>(
+            <rect key={`${r}-${c}`} x={30+c*36} y={40+r*30} width="32" height="24" rx="3" fill="#fff" fillOpacity={r===0?0.85:0.18+r*0.05} />
+          )))}
+        </svg>
+      );
+    case "python":
+      return (
+        <svg className={common} viewBox="0 0 200 200" fill="none">
+          <path d="M70 50 Q60 50 60 60 L60 100 L130 100 Q140 100 140 110 L140 150" stroke="#fff" strokeOpacity="0.85" strokeWidth="6" strokeLinecap="round" fill="none" />
+          <path d="M130 150 Q140 150 140 140 L140 100 L70 100 Q60 100 60 90 L60 50" stroke="#fff" strokeOpacity="0.4" strokeWidth="6" strokeLinecap="round" fill="none" />
+          <circle cx="78" cy="62" r="4" fill="#fff" />
+          <circle cx="122" cy="138" r="4" fill="#fff" fillOpacity="0.6" />
+        </svg>
+      );
+    case "shield":
+      return (
+        <svg className={common} viewBox="0 0 200 200" fill="none">
+          <path d="M100 30 L160 55 L160 110 Q160 155 100 175 Q40 155 40 110 L40 55 Z" fill="#fff" fillOpacity="0.12" stroke="#fff" strokeOpacity="0.75" strokeWidth="2" />
+          <path d="M75 100 L95 120 L130 80" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      );
+    case "sql":
+      return (
+        <svg className={common} viewBox="0 0 200 200" fill="none">
+          {[0,1,2].map(i=>(
+            <g key={i}>
+              <ellipse cx="100" cy={60+i*32} rx="55" ry="12" fill="#fff" fillOpacity={0.85-i*0.2} />
+              <path d={`M45 ${60+i*32} L45 ${72+i*32} Q45 ${84+i*32} 100 ${84+i*32} Q155 ${84+i*32} 155 ${72+i*32} L155 ${60+i*32}`} fill="#fff" fillOpacity={0.12} stroke="#fff" strokeOpacity="0.4" strokeWidth="1" />
+            </g>
+          ))}
+        </svg>
+      );
+  }
+}
+
+function CertCard({ data }: { data: Cert }) {
+  return (
+    <div className="relative w-full h-full flex flex-col justify-between p-5 text-white" style={{ background: "linear-gradient(160deg, #1f1f22 0%, #2c2c30 40%, #4a4a50 100%)" }}>
+      <div className="flex items-start justify-between">
+        <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">{data.issuer}</span>
+        <span className="text-[10px] font-mono text-white/60">{data.year}</span>
+      </div>
+      <div className="flex-1 flex items-center justify-center px-2 py-4">
+        <div className="w-32 h-32 sm:w-36 sm:h-36">
+          <CertIllustration kind={data.illo} />
+        </div>
+      </div>
+      <div>
+        <div className="h-px w-full bg-white/20 mb-3" />
+        <div className="font-display text-lg leading-tight">{data.title}</div>
+        <div className="text-[10px] mt-1 uppercase tracking-widest text-white/50">Certificate</div>
+      </div>
+    </div>
+  );
+}
+
+
 // Pill labels for the constellation — drawn from my actual toolkit.
 const constellationPills = [
   { label: "MODEL ARCHITECTURES", x: 7, y: 22 },
