@@ -175,63 +175,64 @@ function Portfolio() {
       </motion.nav>
 
 
-      <main className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-24">
+      <main className="max-w-[1400px] mx-auto px-3 sm:px-4 lg:px-8 pt-20 sm:pt-24">
         {/* HERO */}
         <motion.section
           ref={heroRef}
           style={{ y: heroY, opacity: heroOpacity }}
-          className="bg-surface-lowest pill-section pt-24 pb-32 soft-shadow mb-8 relative overflow-hidden"
+          className="bg-surface-lowest pill-section pt-16 sm:pt-24 pb-20 sm:pb-32 soft-shadow mb-6 sm:mb-8 relative overflow-hidden"
         >
           <div className="pointer-events-none absolute -top-20 -left-20 w-96 h-96 rounded-full bg-accent/30 blur-3xl animate-blob" />
           <div className="pointer-events-none absolute -bottom-32 -right-10 w-[28rem] h-[28rem] rounded-full bg-accent/20 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
 
-          <div className="flex flex-col items-center text-center max-w-3xl mx-auto px-6 relative">
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto px-4 sm:px-6 relative">
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
               className="relative mb-8 group"
             >
-              <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-border p-1 bg-surface-lowest">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-border p-1 bg-surface-lowest">
                 <img className="w-full h-full object-cover rounded-full" src={SANJAY} alt="Sanjay PC" />
               </div>
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-20 top-4 bg-surface-lowest px-3 py-1 rounded-full border border-border shadow-sm flex items-center gap-1 whitespace-nowrap"
+                className="hidden sm:flex absolute -right-20 top-4 bg-surface-lowest px-3 py-1 rounded-full border border-border shadow-sm items-center gap-1 whitespace-nowrap"
               >
                 <span className="text-xs font-medium">Sanjay PC</span>
                 <span>👋</span>
               </motion.div>
             </motion.div>
 
-            <h1 className="font-display text-5xl md:text-7xl leading-[1.05] mb-8">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6 sm:mb-8">
               {"Building products,".split(" ").map((w, i) => (
-                <motion.span key={i} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.4 + i * 0.08, duration: 0.6 }} className="inline-block mr-3">
+                <motion.span key={i} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.4 + i * 0.08, duration: 0.6 }} className="inline-block mr-2 sm:mr-3">
                   {w}
                 </motion.span>
               ))}
               <br />
               <motion.span initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.7, duration: 0.6 }} className="inline-block italic">agents</motion.span>
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="inline-block mx-3">&</motion.span>
+              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="inline-block mx-2 sm:mx-3">&</motion.span>
               <motion.span initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1, duration: 0.6 }} className="inline-block">experiences.</motion.span>
             </h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.6 }} className="text-muted-foreground max-w-xl mb-10">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.6 }} className="text-sm sm:text-base text-muted-foreground max-w-xl mb-8 sm:mb-10">
               Full-Stack Developer crafting MERN applications and autonomous AI agents.
               I ship to real users and grow through direct feedback.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.35, duration: 0.6 }} className="flex flex-wrap gap-3 justify-center">
-              <a href="#work" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-medium hover:scale-105 transition-transform">
+              <a href="#work" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium hover:scale-105 transition-transform">
                 See my work →
               </a>
-              <a href="mailto:pcsanjay2006@gmail.com" className="inline-flex items-center gap-2 bg-surface-lowest border border-border px-7 py-3.5 rounded-full text-sm font-medium hover:bg-surface-high transition">
+              <a href="mailto:pcsanjay2006@gmail.com" className="inline-flex items-center gap-2 bg-surface-lowest border border-border px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium hover:bg-surface-high transition">
                 Get in touch
               </a>
             </motion.div>
           </div>
         </motion.section>
+
 
         {/* MARQUEE STACK */}
         <section className="bg-surface-low pill-section py-10 mb-8 overflow-hidden">
