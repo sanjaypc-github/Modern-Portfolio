@@ -4,11 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 
 export interface CardItem {
-  imgUrl: string;
+  imgUrl?: string;
   alt?: string;
   linkUrl?: string;
   title?: string;
   subtitle?: string;
+  node?: React.ReactNode;
 }
 
 interface SocialCardsProps {
