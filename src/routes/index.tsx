@@ -235,15 +235,16 @@ function Portfolio() {
 
 
         {/* MARQUEE STACK */}
-        <section className="bg-surface-low pill-section py-10 mb-8 overflow-hidden">
-          <div className="flex gap-12 animate-marquee whitespace-nowrap">
+        <section className="bg-surface-low pill-section py-6 sm:py-10 mb-6 sm:mb-8 overflow-hidden">
+          <div className="flex gap-8 sm:gap-12 animate-marquee whitespace-nowrap">
             {[...stack, ...stack].map((s, i) => (
-              <span key={i} className="font-display text-3xl text-foreground/70 italic">
-                {s} <span className="text-accent not-italic mx-2">✦</span>
+              <span key={i} className="font-display text-xl sm:text-3xl text-foreground/70 italic">
+                {s} <span className="text-accent not-italic mx-1 sm:mx-2">✦</span>
               </span>
             ))}
           </div>
         </section>
+
 
         {/* ABOUT — top headline */}
         <section id="about" className="mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden px-8 md:px-14 pt-16 pb-10">
