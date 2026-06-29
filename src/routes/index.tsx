@@ -166,13 +166,14 @@ function Portfolio() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 px-2 py-2 rounded-full bg-surface-lowest/80 backdrop-blur border border-border soft-shadow"
+        className="fixed top-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1.5 sm:py-2 rounded-full bg-surface-lowest/80 backdrop-blur border border-border soft-shadow max-w-[95vw]"
       >
-        <span className="px-4 py-1.5 text-sm font-medium">Sanjay PC</span>
-        <a href="#work" className="px-4 py-1.5 text-sm rounded-full hover:bg-surface-high transition">Work</a>
-        <a href="#about" className="px-4 py-1.5 text-sm rounded-full hover:bg-surface-high transition">About</a>
-        <a href="#contact" className="px-4 py-1.5 text-sm rounded-full bg-primary text-primary-foreground hover:opacity-90 transition">Contact</a>
+        <span className="px-2 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium whitespace-nowrap">Sanjay PC</span>
+        <a href="#work" className="px-2 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm rounded-full hover:bg-surface-high transition">Work</a>
+        <a href="#about" className="px-2 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm rounded-full hover:bg-surface-high transition">About</a>
+        <a href="#contact" className="px-2 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm rounded-full bg-primary text-primary-foreground hover:opacity-90 transition">Contact</a>
       </motion.nav>
+
 
       <main className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-24">
         {/* HERO */}
