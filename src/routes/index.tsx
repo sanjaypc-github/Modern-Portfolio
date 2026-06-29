@@ -424,26 +424,26 @@ function Portfolio() {
 
         {/* Project Dialog */}
         <Dialog open={openIdx !== null} onOpenChange={(o) => !o && setOpenIdx(null)}>
-          <DialogContent className="max-w-3xl p-0 overflow-hidden bg-surface-lowest border-border">
+          <DialogContent className="max-w-3xl w-[95vw] sm:w-full p-0 overflow-hidden bg-surface-lowest border-border">
             {active && (
               <div className="flex flex-col">
-                <div className="relative h-56 w-full overflow-hidden">
+                <div className="relative h-44 sm:h-56 w-full overflow-hidden">
                   <img src={active.image} alt={active.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-lowest via-surface-lowest/20 to-transparent" />
                   <button
                     onClick={() => setOpenIdx(null)}
-                    className="absolute top-4 right-4 size-9 rounded-full bg-surface-lowest/90 border border-border flex items-center justify-center hover:bg-surface-high transition"
+                    className="absolute top-3 right-3 size-9 rounded-full bg-surface-lowest/90 border border-border flex items-center justify-center hover:bg-surface-high transition"
                     aria-label="Close"
                   >
                     <X className="size-4" />
                   </button>
-                  <div className="absolute bottom-4 left-6 right-6">
+                  <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-6 right-4 sm:right-6">
                     <span className="text-xs font-mono text-muted-foreground">{active.year}</span>
-                    <h3 className="font-display text-3xl md:text-4xl mt-1">{active.title}</h3>
+                    <h3 className="font-display text-2xl sm:text-3xl md:text-4xl mt-1">{active.title}</h3>
                   </div>
                 </div>
 
-                <div className="p-8 space-y-6 max-h-[55vh] overflow-y-auto">
+                <div className="p-5 sm:p-8 space-y-5 sm:space-y-6 max-h-[55vh] overflow-y-auto">
                   <div>
                     <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-accent mb-2">
                       <Sparkles className="size-3" /> Problem
@@ -471,12 +471,12 @@ function Portfolio() {
         </Dialog>
 
         {/* SKILLS GRID */}
-        <section className="mb-8 bg-surface-low pill-section p-12">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-6">Toolkit</span>
-            <h2 className="font-display text-4xl">What I work with daily.</h2>
+        <section className="mb-6 sm:mb-8 bg-surface-low pill-section p-6 sm:p-12">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <span className="inline-block px-4 py-1.5 bg-surface-lowest rounded-full text-xs font-medium mb-4 sm:mb-6">Toolkit</span>
+            <h2 className="font-display text-3xl sm:text-4xl">What I work with daily.</h2>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {[
               { t: "Languages", v: "JS, Python, C++, SQL" },
               { t: "Frontend", v: "React, Streamlit" },
@@ -493,14 +493,109 @@ function Portfolio() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="bg-surface-lowest p-6 rounded-2xl"
+                className="bg-surface-lowest p-4 sm:p-6 rounded-2xl"
               >
-                <div className="text-xs text-accent font-medium uppercase tracking-wider mb-2">{c.t}</div>
-                <div className="text-sm">{c.v}</div>
+                <div className="text-[10px] sm:text-xs text-accent font-medium uppercase tracking-wider mb-2">{c.t}</div>
+                <div className="text-xs sm:text-sm">{c.v}</div>
               </motion.div>
             ))}
           </div>
         </section>
+
+        {/* CERTIFICATIONS — fan carousel */}
+        <section className="mb-6 sm:mb-8 bg-surface-lowest pill-section soft-shadow px-4 sm:px-8 md:px-14 py-14 sm:py-20 overflow-hidden">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <span className="inline-block px-4 py-1.5 bg-surface-high rounded-full text-xs font-medium mb-4 sm:mb-6">Certifications</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">
+              Always <span className="italic">leveling up</span>.
+            </h2>
+            <p className="text-sm text-muted-foreground mt-4">Credentials that shaped the stack.</p>
+          </div>
+
+          <SocialCards cards={certifications.map((c) => ({ node: <CertCard data={c} /> }))} />
+        </section>
+
+        {/* RECOGNITION + STATS */}
+        <section className="mb-6 sm:mb-8 bg-surface-lowest pill-section p-6 sm:p-12 soft-shadow">
+          <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8 sm:gap-12 items-start">
+            <div>
+              <span className="inline-block px-4 py-1.5 bg-surface-high rounded-full text-xs font-medium mb-4 sm:mb-6">Recognition</span>
+              <h2 className="font-display text-3xl sm:text-4xl mb-8 sm:mb-10">Papers, patents & milestones.</h2>
+              <div className="divide-y divide-border">
+                {[
+                  { y: "2025", t: "Paper Published", d: "Autocorrect Algorithm for Real-time text correction in Multilingual keyboard Systems" },
+                  { y: "2025", t: "Patent Published", d: "Mayon — The Smart Crop Rotator & Market Profit Optimizer" },
+                  { y: "—", t: "LeetCode", d: "200+ problems solved" },
+                  { y: "—", t: "SkillRack", d: "100+ problems solved" },
+                  { y: "2025", t: "MERN Internship", d: "GSOFT Tech Solutions — agile, code reviews, production REST APIs" },
+                ].map((row, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="grid grid-cols-[44px_1fr] sm:grid-cols-[60px_180px_1fr] gap-x-3 sm:gap-4 gap-y-1 py-4 sm:py-5 items-baseline hover:bg-surface-low transition rounded-xl px-2 sm:px-3 -mx-2 sm:-mx-3"
+                  >
+                    <span className="text-[10px] sm:text-xs text-muted-foreground font-mono">{row.y}</span>
+                    <span className="font-medium text-sm sm:text-base">{row.t}</span>
+                    <span className="col-span-2 sm:col-span-1 text-xs sm:text-sm text-muted-foreground">{row.d}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats card */}
+            <div className="bg-surface-low rounded-3xl p-6 sm:p-8 lg:sticky lg:top-24">
+              <div className="text-xs font-mono uppercase tracking-widest text-accent mb-4 sm:mb-6">By the numbers</div>
+              <div className="grid grid-cols-2 gap-3 sm:gap-6">
+                {achievements.map((a) => (
+                  <motion.div
+                    key={a.v}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-surface-lowest border border-border rounded-2xl p-4 sm:p-5"
+                  >
+                    <div className="font-display text-2xl sm:text-3xl md:text-4xl text-accent leading-none">{a.k}</div>
+                    <div className="text-[10px] sm:text-[11px] text-muted-foreground mt-2 uppercase tracking-wider">{a.v}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section id="contact" className="bg-surface-lowest pill-section py-20 sm:py-32 soft-shadow mb-10 sm:mb-12 relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-accent/20 blur-3xl animate-blob" />
+          </div>
+          <div className="flex flex-col items-center text-center max-w-2xl mx-auto px-4 sm:px-6 relative z-10">
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="w-14 h-14 sm:w-16 sm:h-16 bg-surface-high rounded-full flex items-center justify-center mb-6 sm:mb-8"
+            >
+              <Sparkles className="size-6 sm:size-7" />
+            </motion.div>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-6xl mb-4">
+              Tell me about your <span className="italic text-accent">next project</span>.
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground mb-8 sm:mb-10">
+              Currently open to internships, freelance projects, and collaborations.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <a href="mailto:pcsanjay2006@gmail.com" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-medium hover:scale-105 transition break-all">
+                pcsanjay2006@gmail.com
+              </a>
+              <a href="tel:+919500322339" className="inline-flex items-center justify-center gap-2 bg-surface-lowest border border-border px-6 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-medium hover:bg-surface-high transition">
+                +91 95003 22339
+              </a>
+            </div>
+          </div>
+        </section>
+
 
         {/* CERTIFICATIONS — fan carousel */}
         <section className="mb-8 bg-surface-lowest pill-section soft-shadow px-8 md:px-14 py-20">
