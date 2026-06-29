@@ -247,9 +247,9 @@ function Portfolio() {
 
 
         {/* ABOUT — top headline */}
-        <section id="about" className="mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden px-8 md:px-14 pt-16 pb-10">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="text-xs font-mono tracking-[0.25em] uppercase mb-6 inline-block" style={{ color: "oklch(0.45 0.2 290)" }}>
+        <section id="about" className="mb-6 sm:mb-8 bg-surface-lowest pill-section soft-shadow relative overflow-hidden px-5 sm:px-8 md:px-14 pt-12 sm:pt-16 pb-10">
+          <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-12">
+            <span className="text-[10px] sm:text-xs font-mono tracking-[0.25em] uppercase mb-4 sm:mb-6 inline-block" style={{ color: "oklch(0.45 0.2 290)" }}>
               What I bring to the table
             </span>
             <motion.h2
@@ -257,7 +257,7 @@ function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="font-display text-4xl md:text-6xl leading-[1.05]"
+              className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05]"
             >
               Turning complexity
               <br />
@@ -265,8 +265,8 @@ function Portfolio() {
             </motion.h2>
           </div>
 
-          {/* Orbital constellation field */}
-          <div className="relative w-full h-[460px] md:h-[520px]">
+          {/* Orbital constellation field — desktop */}
+          <div className="hidden md:block relative w-full h-[460px] md:h-[520px]">
             {/* Dashed connectors */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none"
@@ -331,7 +331,40 @@ function Portfolio() {
             {/* Decorative sparkle */}
             <Sparkles className="absolute right-2 bottom-4 size-5 text-foreground/30" />
           </div>
+
+          {/* Mobile alternative — pills + small orbs grid */}
+          <div className="md:hidden relative">
+            <div className="relative h-40 mb-6">
+              {orbs.slice(0, 6).map((o, i) => (
+                <motion.div
+                  key={o.id}
+                  initial={{ opacity: 0, scale: 0.4 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, type: "spring", stiffness: 140 }}
+                  className="absolute rounded-full animate-blob"
+                  style={{
+                    left: `${o.x}%`,
+                    top: `${o.y}%`,
+                    width: `${Math.max(14, o.size * 0.55)}px`,
+                    height: `${Math.max(14, o.size * 0.55)}px`,
+                    background: orbBackground(o.tone),
+                    boxShadow: "0 6px 18px -6px oklch(0.25 0.12 285 / 0.45)",
+                    animationDelay: `${i * 0.3}s`,
+                  }}
+                />
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {constellationPills.map((p) => (
+                <span key={p.label} className="bg-surface-lowest border border-border rounded-md px-2.5 py-1 text-[9px] font-mono tracking-widest shadow-sm">
+                  {p.label}
+                </span>
+              ))}
+            </div>
+          </div>
         </section>
+
 
         {/* PROFESSIONAL SUMMARY — scroll reveal magic text */}
         <section className="mb-8 bg-surface-low pill-section px-8 md:px-14 py-24">
