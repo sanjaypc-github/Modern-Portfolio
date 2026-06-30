@@ -19,6 +19,13 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { MagicText } from "@/components/ui/magic-text";
 import SocialCards from "@/components/ui/card-fan-carousel";
 import { Footer } from "@/components/ui/modem-animated-footer";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
