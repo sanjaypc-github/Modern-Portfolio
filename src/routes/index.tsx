@@ -19,6 +19,13 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { MagicText } from "@/components/ui/magic-text";
 import SocialCards from "@/components/ui/card-fan-carousel";
 import { Footer } from "@/components/ui/modem-animated-footer";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -208,10 +215,10 @@ function CertCard({ data }: { data: Cert }) {
 const constellationPills = [
   { label: "MODEL ARCHITECTURES", x: 7, y: 22 },
   { label: "CLOUD DEPLOYMENT", x: 30, y: 13 },
-  { label: "PERFORMANCE TUNING", x: 70, y: 16 },
-  { label: "DATA PIPELINES", x: 22, y: 78 },
+  { label: "AGENTIC WORKFLOWS", x: 70, y: 16 },
+  { label: "STATEFUL AGENTS", x: 22, y: 78 },
   { label: "API INTEGRATION", x: 44, y: 82 },
-  { label: "CI/CD FOR ML", x: 65, y: 67 },
+  { label: "MCP IMPLEMENTATION", x: 65, y: 67 },
 ];
 
 // Dashed connector paths in 0–100 viewBox space connecting the orbs.
@@ -597,7 +604,29 @@ function Portfolio() {
             <p className="text-sm text-muted-foreground mt-4">Credentials that shaped the stack.</p>
           </div>
 
-          <SocialCards cards={certifications.map((c) => ({ node: <CertCard data={c} /> }))} />
+          {/* Desktop / tablet: fan carousel */}
+          <div className="hidden sm:block">
+            <SocialCards cards={certifications.map((c) => ({ node: <CertCard data={c} /> }))} />
+          </div>
+
+          {/* Mobile: simple swipeable carousel */}
+          <div className="sm:hidden">
+            <Carousel opts={{ align: "center", loop: true }} className="w-full max-w-[18rem] mx-auto">
+              <CarouselContent>
+                {certifications.map((c, i) => (
+                  <CarouselItem key={i} className="basis-full">
+                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-border bg-surface-lowest shadow-xl">
+                      <CertCard data={c} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex items-center justify-center gap-3 mt-5">
+                <CarouselPrevious className="static translate-y-0" />
+                <CarouselNext className="static translate-y-0" />
+              </div>
+            </Carousel>
+          </div>
         </section>
 
         {/* RECOGNITION + STATS */}
