@@ -208,10 +208,10 @@ function CertCard({ data }: { data: Cert }) {
 const constellationPills = [
   { label: "MODEL ARCHITECTURES", x: 7, y: 22 },
   { label: "CLOUD DEPLOYMENT", x: 30, y: 13 },
-  { label: "PERFORMANCE TUNING", x: 70, y: 16 },
-  { label: "DATA PIPELINES", x: 22, y: 78 },
+  { label: "AGENTIC WORKFLOWS", x: 70, y: 16 },
+  { label: "STATEFUL AGENTS", x: 22, y: 78 },
   { label: "API INTEGRATION", x: 44, y: 82 },
-  { label: "CI/CD FOR ML", x: 65, y: 67 },
+  { label: "MCP IMPLEMENTATION", x: 65, y: 67 },
 ];
 
 // Dashed connector paths in 0–100 viewBox space connecting the orbs.
