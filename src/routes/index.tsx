@@ -597,7 +597,29 @@ function Portfolio() {
             <p className="text-sm text-muted-foreground mt-4">Credentials that shaped the stack.</p>
           </div>
 
-          <SocialCards cards={certifications.map((c) => ({ node: <CertCard data={c} /> }))} />
+          {/* Desktop / tablet: fan carousel */}
+          <div className="hidden sm:block">
+            <SocialCards cards={certifications.map((c) => ({ node: <CertCard data={c} /> }))} />
+          </div>
+
+          {/* Mobile: simple swipeable carousel */}
+          <div className="sm:hidden">
+            <Carousel opts={{ align: "center", loop: true }} className="w-full max-w-[18rem] mx-auto">
+              <CarouselContent>
+                {certifications.map((c, i) => (
+                  <CarouselItem key={i} className="basis-full">
+                    <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-border bg-surface-lowest shadow-xl">
+                      <CertCard data={c} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex items-center justify-center gap-3 mt-5">
+                <CarouselPrevious className="static translate-y-0" />
+                <CarouselNext className="static translate-y-0" />
+              </div>
+            </Carousel>
+          </div>
         </section>
 
         {/* RECOGNITION + STATS */}
