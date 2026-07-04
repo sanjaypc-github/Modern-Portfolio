@@ -13,7 +13,7 @@ import {
   Mail,
   Code2,
 } from "lucide-react";
-import sanjayAsset from "@/assets/sanjay.jpeg.asset.json";
+import sanjayImg from "@/assets/sanjay.jpeg?url";
 import DisplayCards from "@/components/ui/display-cards";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { MagicText } from "@/components/ui/magic-text";
@@ -30,16 +30,16 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sanjay PC — Full-Stack Developer & AI Engineer" },
-      { name: "description", content: "Portfolio of Sanjay PC. Full-Stack MERN developer building autonomous AI agents, real-time analytics, and production-ready products." },
-      { property: "og:title", content: "Sanjay PC — Full-Stack & AI" },
-      { property: "og:description", content: "MERN + Autonomous AI agents. 200+ LeetCode. Paper & Patent published." },
+      { title: "Sanjay PC - AI/ML Engineer" },
+      { name: "description", content: "Portfolio of Sanjay PC. AI/ML engineer building autonomous AI agents, real-time analytics, and production-ready products." },
+      { property: "og:title", content: "Sanjay PC - AI/ML Engineer" },
+      { property: "og:description", content: "AI/ML engineer building autonomous AI agents, analytics tools, and production-ready products." },
     ],
   }),
   component: Portfolio,
 });
 
-const SANJAY = sanjayAsset.url;
+const SANJAY = sanjayImg;
 
 const stack = ["JavaScript", "Python", "React", "Node.js", "Express", "FastAPI", "MongoDB", "MySQL", "TensorFlow", "Gemini", "LangChain", "Docker", "Streamlit"];
 
@@ -52,6 +52,7 @@ type Project = {
   image: string;
   problem: string;
   solution: string;
+  github?: string;
 };
 
 const projects: Project[] = [
@@ -66,6 +67,7 @@ const projects: Project[] = [
       "Analysts spend hours writing repetitive pandas code to answer routine questions about CSV datasets, and untrusted LLM-generated code is risky to execute directly.",
     solution:
       "Built a production-ready agent that converts natural-language questions into pandas code, validates it through an AST whitelist, and runs it inside a Docker sandbox — returning charts and tabular insights in seconds.",
+    github: "https://github.com/sanjaypc-github/Ai-data-analysist",
   },
   {
     year: "2026",
@@ -78,6 +80,7 @@ const projects: Project[] = [
       "Small businesses want an AI customer-support agent on their site but can't afford infra, databases, or dev time to stand one up.",
     solution:
       "Designed a zero-infra chatbot where the entire knowledge base lives in a single editable file. Google Apps Script acts as a serverless backend, so anyone can deploy it in minutes.",
+    github: "https://github.com/sanjaypc-github/Plug-and-Play-AI-Customer-Service-Agent",
   },
   {
     year: "2025",
@@ -90,6 +93,7 @@ const projects: Project[] = [
       "Off-the-shelf analytics tools are heavy, expensive, and leak user data to third parties — hard to recommend to indie SaaS founders.",
     solution:
       "Built a self-hosted MERN dashboard that tracks unique visitors, session length, and bounce-rate live, with interactive historical charts powered by a lightweight tracking snippet.",
+    github: "https://github.com/sanjaypc-github/website_traffic_counter",
   },
   {
     year: "2026",
@@ -102,6 +106,7 @@ const projects: Project[] = [
       "Remote learners drift in and out of focus, and educators have no objective way to measure attention during online sessions.",
     solution:
       "Created a webcam-based pipeline that scores Focused vs Distracted in real time using facial landmarks, with a lightweight fallback model when no GPU is available.",
+    github: "https://github.com/sanjaypc-github/student-attention-analyser",
   },
 ];
 
@@ -127,13 +132,13 @@ const orbs: Orb[] = [
 ];
 
 // Certifications — 5 cards with minimal greyscale illustrations
-type Cert = { title: string; issuer: string; year: string; illo: "network" | "pandas" | "python" | "shield" | "sql" };
+type Cert = { title: string; issuer: string; year: string; illo: "network" | "pandas" | "python" | "shield" | "sql"; url?: string };
 const certifications: Cert[] = [
-  { title: "Cisco Networking Basics", issuer: "Cisco", year: "2025", illo: "network" },
-  { title: "Pandas in Python", issuer: "Kaggle", year: "2024", illo: "pandas" },
-  { title: "Python Basics", issuer: "Kaggle", year: "2024", illo: "python" },
-  { title: "Introduction to Cybersecurity", issuer: "Simplilearn", year: "2026", illo: "shield" },
-  { title: "SQL Basics", issuer: "HackerRank", year: "2024", illo: "sql" },
+  { title: "Cisco Networking Basics", issuer: "Cisco", year: "2025", illo: "network", url: "https://drive.google.com/file/d/1VM7pa2P3P8EDe9KOHRtr2bX_962sLPiQ/view?usp=sharing" },
+  { title: "Pandas in Python", issuer: "Kaggle", year: "2024", illo: "pandas", url: "https://drive.google.com/file/d/1bR8J1ENEY5myO-dxpeXnAAY42FGV81fk/view?usp=sharing" },
+  { title: "Python Basics", issuer: "Kaggle", year: "2024", illo: "python", url: "" },
+  { title: "Introduction to Cybersecurity", issuer: "Simplilearn", year: "2026", illo: "shield", url: "https://drive.google.com/file/d/12uT7IBD0-3DhZdy-72C7mSSkTACYcWG0/view?usp=sharing" },
+  { title: "SQL Basics", issuer: "HackerRank", year: "2024", illo: "sql", url: "https://drive.google.com/file/d/1r4dTwwo-7ZHEKUDPveL8PTBIH5YCKc1t/view?usp=sharing" },
 ];
 
 function CertIllustration({ kind }: { kind: Cert["illo"] }) {
@@ -190,7 +195,7 @@ function CertIllustration({ kind }: { kind: Cert["illo"] }) {
 }
 
 function CertCard({ data }: { data: Cert }) {
-  return (
+  const Card = (
     <div className="relative w-full h-full flex flex-col justify-between p-5 text-white" style={{ background: "linear-gradient(160deg, #1f1f22 0%, #2c2c30 40%, #4a4a50 100%)" }}>
       <div className="flex items-start justify-between">
         <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">{data.issuer}</span>
@@ -208,6 +213,16 @@ function CertCard({ data }: { data: Cert }) {
       </div>
     </div>
   );
+
+  if (data.url) {
+    return (
+      <a href={data.url} target="_blank" rel="noopener noreferrer" className="block cursor-pointer hover:opacity-90 transition">
+        {Card}
+      </a>
+    );
+  }
+
+  return Card;
 }
 
 
@@ -318,8 +333,8 @@ function Portfolio() {
               <a href="#work" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium hover:scale-105 transition-transform">
                 See my work →
               </a>
-              <a href="mailto:pcsanjay2006@gmail.com" className="inline-flex items-center gap-2 bg-surface-lowest border border-border px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium hover:bg-surface-high transition">
-                Get in touch
+              <a href="https://drive.google.com/file/d/1-ZnVLB5MDn_wGIU1Pro-ncL4wNIxC4rT/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-surface-lowest border border-border px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium hover:bg-surface-high transition">
+                Download Resume
               </a>
             </motion.div>
           </div>
@@ -556,6 +571,13 @@ function Portfolio() {
                       ))}
                     </div>
                   </div>
+                  {active.github && (
+                    <div>
+                      <a href={active.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium hover:opacity-90 transition">
+                        <Github className="size-4" /> View on GitHub
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -637,25 +659,35 @@ function Portfolio() {
               <h2 className="font-display text-3xl sm:text-4xl mb-8 sm:mb-10">Papers, patents & milestones.</h2>
               <div className="divide-y divide-border">
                 {[
-                  { y: "2025", t: "Paper Published", d: "Autocorrect Algorithm for Real-time text correction in Multilingual keyboard Systems" },
-                  { y: "2025", t: "Patent Published", d: "Mayon — The Smart Crop Rotator & Market Profit Optimizer" },
-                  { y: "—", t: "LeetCode", d: "200+ problems solved" },
-                  { y: "—", t: "SkillRack", d: "100+ problems solved" },
-                  { y: "2025", t: "MERN Internship", d: "GSOFT Tech Solutions — agile, code reviews, production REST APIs" },
-                ].map((row, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="grid grid-cols-[44px_1fr] sm:grid-cols-[60px_180px_1fr] gap-x-3 sm:gap-4 gap-y-1 py-4 sm:py-5 items-baseline hover:bg-surface-low transition rounded-xl px-2 sm:px-3 -mx-2 sm:-mx-3"
-                  >
-                    <span className="text-[10px] sm:text-xs text-muted-foreground font-mono">{row.y}</span>
-                    <span className="font-medium text-sm sm:text-base">{row.t}</span>
-                    <span className="col-span-2 sm:col-span-1 text-xs sm:text-sm text-muted-foreground">{row.d}</span>
-                  </motion.div>
-                ))}
+                  { y: "2025", t: "Paper Published", d: "Autocorrect Algorithm for Real-time text correction in Multilingual keyboard Systems", url: "https://drive.google.com/file/d/1YBdMoaTGuG5_wMPE-SRLs7QWoZ3_KHQf/view?usp=sharing" },
+                  { y: "2025", t: "Patent Published", d: "Mayon — The Smart Crop Rotator & Market Profit Optimizer", url: "https://drive.google.com/file/d/16e6rt5dtR4H0W4sek9Iq4tX744HITr1J/view?usp=sharing" },
+                  { y: "—", t: "LeetCode", d: "200+ problems solved", url: "https://leetcode.com/u/sanjayPC/" },
+                  { y: "—", t: "SkillRank", d: "100+ problems solved" },
+                  { y: "2025", t: "MERN Internship", d: "GSOFT Tech Solutions — agile, code reviews, production REST APIs", url: "https://drive.google.com/file/d/1-kFFJUMo6MQxxMNJmTgKelrR-Lr7Lwur/view?usp=sharing" },
+                ].map((row, i) => {
+                  const content = (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05 }}
+                      className="grid grid-cols-[44px_1fr] sm:grid-cols-[60px_180px_1fr] gap-x-3 sm:gap-4 gap-y-1 py-4 sm:py-5 items-baseline hover:bg-surface-low transition rounded-xl px-2 sm:px-3 -mx-2 sm:-mx-3"
+                    >
+                      <span className="text-[10px] sm:text-xs text-muted-foreground font-mono">{row.y}</span>
+                      <span className="font-medium text-sm sm:text-base">{row.t}</span>
+                      <span className="col-span-2 sm:col-span-1 text-xs sm:text-sm text-muted-foreground">{row.d}</span>
+                    </motion.div>
+                  );
+                  if (row.url) {
+                    return (
+                      <a key={i} href={row.url} target="_blank" rel="noopener noreferrer" className="block">
+                        {content}
+                      </a>
+                    );
+                  }
+                  return content;
+                })}
               </div>
             </div>
 
@@ -718,9 +750,9 @@ function Portfolio() {
             brandName="Sanjay PC"
             brandDescription="Full-Stack Developer & AI Engineer building MERN products and autonomous agents that ship to real users."
             socialLinks={[
-              { icon: <Github className="size-5" />, href: "https://github.com", label: "GitHub" },
-              { icon: <Linkedin className="size-5" />, href: "https://linkedin.com", label: "LinkedIn" },
-              { icon: <Code2 className="size-5" />, href: "https://leetcode.com", label: "LeetCode" },
+              { icon: <Github className="size-5" />, href: "https://github.com/sanjaypc-github/", label: "GitHub" },
+              { icon: <Linkedin className="size-5" />, href: "https://www.linkedin.com/in/sanjay-pc/", label: "LinkedIn" },
+              { icon: <Code2 className="size-5" />, href: "https://leetcode.com/u/sanjayPC/", label: "LeetCode" },
               { icon: <Mail className="size-5" />, href: "mailto:pcsanjay2006@gmail.com", label: "Email" },
             ]}
             navLinks={[

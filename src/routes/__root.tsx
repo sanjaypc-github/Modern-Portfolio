@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import sanjayIcon from "../assets/sanjay.jpeg?url";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -77,19 +78,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sanjay PC — Full-Stack Developer & AI Engineer" },
-      { name: "description", content: "Portfolio of Sanjay PC — Full-stack MERN developer and autonomous AI agent builder." },
+      { title: "Sanjay PC - AI/ML Engineer" },
+      { name: "description", content: "Portfolio of Sanjay PC — AI/ML Engineer" },
       { name: "author", content: "Sanjay PC" },
-      { property: "og:title", content: "Sanjay PC — Full-Stack Developer & AI Engineer" },
-      { property: "og:description", content: "Portfolio of Sanjay PC — Full-stack MERN developer and autonomous AI agent builder." },
+      { property: "og:title", content: "Sanjay PC - AI/ML Engineer" },
+      { property: "og:description", content: "Portfolio of Sanjay PC — AI/ML Engineer." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Sanjay PC — Full-Stack Developer & AI Engineer" },
-      { name: "twitter:description", content: "Portfolio of Sanjay PC — Full-stack MERN developer and autonomous AI agent builder." },
+      { name: "twitter:title", content: "Sanjay PC - AI/ML Engineer" },
+      { name: "twitter:description", content: "Portfolio of Sanjay PC — AI/ML Engineer." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d55b5134-e892-4999-8ac6-e2b2a2b310de/id-preview-10d9608a--316c5e55-843c-410f-8bc7-9f051cce6aa7.lovable.app-1782625456673.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d55b5134-e892-4999-8ac6-e2b2a2b310de/id-preview-10d9608a--316c5e55-843c-410f-8bc7-9f051cce6aa7.lovable.app-1782625456673.png" },
     ],
     links: [
+      { rel: "icon", type: "image/jpeg", href: sanjayIcon },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
